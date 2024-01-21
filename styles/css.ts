@@ -7,5 +7,7 @@ export const [hooks, css] = createHooks({
     colorSchemes: ["dark", "light"],
     pseudoClasses: [":hover", ":focus", ":active", ":disabled"],
   }),
-  trackArtHovered: ".trackArt:hover &",
+  "&:showOverlay": {
+    or: [":hover", ":focus-within"],
+  },
 });

@@ -33,6 +33,8 @@ export const AppHeader = () => {
         <Link
           style={css({
             color: "var(--slate-12)",
+            display: "grid",
+            placeItems: "center",
           })}
           href="/"
         >

@@ -1,11 +1,11 @@
 import { Grid } from "@radix-ui/themes";
-import { TrackItem } from "./TrackItem";
+import { TrackCard } from "./TrackCard";
 
 export const TrackGrid = () => {
   return (
     <Grid p="5" asChild>
       <ul>
-        <TrackItem />
+        <TrackCard />
       </ul>
     </Grid>
   );
