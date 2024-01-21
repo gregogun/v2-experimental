@@ -8,6 +8,12 @@ export const [hooks, css] = createHooks({
     pseudoClasses: [":hover", ":focus", ":active", ":disabled"],
   }),
   "&:showOverlay": {
-    or: [":hover", ":focus-within"],
+    or: [
+      ":hover",
+      {
+        // need to find a way to target focus visible on button
+        and: [":focus-within", ":focus-visible"],
+      },
+    ],
   },
 });
