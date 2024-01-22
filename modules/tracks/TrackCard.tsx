@@ -1,5 +1,5 @@
 import { css } from "@/styles/css";
-import { Box, Flex, IconButton, Text } from "@radix-ui/themes";
+import { Box, Flex, IconButton, Link, Text } from "@radix-ui/themes";
 import { MdPause, MdPlayArrow } from "react-icons/md";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { styled } from "@stitches/react";
@@ -145,10 +145,12 @@ export const TrackCard = () => {
             />
           </Box>
           <Flex direction="column">
-            <Text size="1">Track Title</Text>
-            <Text size="1" color="gray">
+            <Link size="1" color={playing ? undefined : "gray"}>
+              Track Title
+            </Link>
+            <Link size="1" color="gray">
               Artist Name
-            </Text>
+            </Link>
           </Flex>
         </Flex>
       </li>

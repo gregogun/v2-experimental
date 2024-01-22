@@ -1,5 +1,5 @@
 import { css } from "@/styles/css";
-import { Box, Flex, IconButton, Text } from "@radix-ui/themes";
+import { Box, Flex, IconButton, Link, Text } from "@radix-ui/themes";
 import { keyframes, styled } from "@stitches/react";
 import { useState } from "react";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
@@ -143,12 +143,12 @@ export const TrackItem = () => {
           />
         </Box>
         <Flex direction="column" justify="between">
-          <Text size="1" weight="medium">
+          <Link size="1" weight="medium" color={playing ? undefined : "gray"}>
             Track Title
-          </Text>
-          <Text size="1" color="gray">
+          </Link>
+          <Link size="1" color="gray">
             Artist Name
-          </Text>
+          </Link>
         </Flex>
       </Flex>
       <Flex gap="4" align="center">
