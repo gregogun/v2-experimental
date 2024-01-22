@@ -100,6 +100,8 @@ export const TrackItem = ({ track }: TrackCardProps) => {
     handlePlayPause,
   } = useAudioPlayer();
 
+  const isPlaying = playing && currentTrackId === track.txid;
+
   const handleClick = () => {
     handlePlayPause?.();
 
@@ -168,7 +170,13 @@ export const TrackItem = ({ track }: TrackCardProps) => {
           />
         </Box>
         <Flex direction="column" justify="between">
-          <Link size="1" weight="medium" color={playing ? undefined : "gray"}>
+          <Link
+            size="1"
+            weight="medium"
+            style={css({
+              color: isPlaying ? "var(--accent-11)" : "var(--gray-12)",
+            })}
+          >
             {track.title}
           </Link>
           <Link
