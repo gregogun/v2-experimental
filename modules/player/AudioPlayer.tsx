@@ -78,10 +78,7 @@ export const AudioPlayer = () => {
   useEffect(() => {
     if (!audioCtxRef.current) {
       audioCtxRef.current = new AudioContext();
-      // console.log("setting audio context");
     }
-
-    // console.log("audioCtx", audioCtxRef);
 
     // set gain node
     if (!gainRef.current) {
@@ -185,7 +182,7 @@ export const AudioPlayer = () => {
         bottom: 0,
         // backgroundColor: "var(--color-panel)",
         // backdropFilter: "blur(10px)",
-        maxHeight: appConfig.playerMaxHeight,
+        maxHeight: "max-content",
         borderTop: "1px solid var(--gray-5)",
       })}
     >
@@ -197,15 +194,15 @@ export const AudioPlayer = () => {
         onPlay={handlePlay}
         onPause={handlePause}
       >
-        <source src={appConfig.testAudioSrc} type="audio/wav" />
-        <source src={appConfig.testAudioSrc} type="audio/mpeg" />
-        <source src={appConfig.testAudioSrc} type="audio/aac" />
-        <source src={appConfig.testAudioSrc} type="audio/ogg" />
+        <source src={currentTrack?.audioSrc} type="audio/wav" />
+        <source src={currentTrack?.audioSrc} type="audio/mpeg" />
+        <source src={currentTrack?.audioSrc} type="audio/aac" />
+        <source src={currentTrack?.audioSrc} type="audio/ogg" />
       </audio>
 
       <Flex gap="3" align="center">
         <Avatar
-          src={`${appConfig.testArtworkSrc}`}
+          src={`${currentTrack?.thumbnailSrc}`}
           fallback={<AvatarFallback />}
           color="gray"
           style={css({
@@ -216,19 +213,30 @@ export const AudioPlayer = () => {
             borderRadius: TRACK_ITEM_RADIUS,
           })}
         />
-        <Flex direction="column">
-          <Link
-            style={css({ color: "var(--gray-12)" })}
-            size="1"
-            weight="medium"
-            color="gray"
-          >
-            Track Title
-          </Link>
-          <Link size="1" color="gray">
-            Artist Name
-          </Link>
-        </Flex>
+        {currentTrack && (
+          <Flex direction="column">
+            <Link
+              style={css({ color: "var(--gray-12)" })}
+              size="1"
+              weight="medium"
+              color="gray"
+            >
+              {currentTrack.title}
+            </Link>
+            <Link
+              size="1"
+              color="gray"
+              style={css({
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                maxWidth: "16ch",
+              })}
+            >
+              {currentTrack?.creator}
+            </Link>
+          </Flex>
+        )}
       </Flex>
 
       <Flex direction="column">
