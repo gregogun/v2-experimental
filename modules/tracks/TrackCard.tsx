@@ -27,6 +27,14 @@ const ActionsOverlay = styled(Flex, {
   "&:hover, &:has(:focus-visible)": {
     opacity: 1,
   },
+
+  variants: {
+    showOverlay: {
+      true: {
+        opacity: 1,
+      },
+    },
+  },
 });
 
 const AlphaIconButton = styled(IconButton, {
@@ -94,7 +102,12 @@ export const TrackCard = () => {
               position: "relative",
             })}
           >
-            <ActionsOverlay justify="between" align="end" gap="3">
+            <ActionsOverlay
+              justify="between"
+              align="end"
+              gap="3"
+              showOverlay={actionsDropdownOpen}
+            >
               <AlphaPlayIconButton
                 onClick={() => setPlaying(!playing)}
                 size="3"
