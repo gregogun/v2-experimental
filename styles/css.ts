@@ -16,4 +16,5 @@ export const [hooks, css] = createHooks({
       },
     ],
   },
+  "&:notDisabeld": "&:not(:disabled)",
 });

@@ -87,6 +87,7 @@ const AlphaPlayIconButton = styled(IconButton, {
 
 const TRACK_ITEM_SIZE = 220;
 const OUTLINE_OFFSET = 0.5;
+const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.6)`;
 
 export const TrackCard = () => {
   const [playing, setPlaying] = useState(false);
@@ -108,6 +109,8 @@ export const TrackCard = () => {
               height: `calc(${TRACK_ITEM_SIZE}px * var(--scaling))`,
               outline: `${OUTLINE_OFFSET}px solid var(--white-a3)`,
               outlineOffset: -OUTLINE_OFFSET,
+              borderRadius: TRACK_ITEM_RADIUS,
+              overflow: "hidden",
               position: "relative",
             })}
           >

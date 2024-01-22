@@ -1,4 +1,5 @@
 import { AppHeader } from "@/modules/layout/AppHeader";
+import { AudioPlayer } from "@/modules/player/AudioPlayer";
 import { TrackGrid } from "@/modules/tracks/TrackGrid";
 import Head from "next/head";
 
@@ -13,6 +14,7 @@ export default function Home() {
       </Head>
       <AppHeader />
       <TrackGrid />
+      <AudioPlayer />
     </>
   );
 }
