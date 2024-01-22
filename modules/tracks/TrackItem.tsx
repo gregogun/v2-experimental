@@ -99,7 +99,7 @@ const StyledDropdownMenuItem = styled(DropdownMenuItem, {
 
 const TRACK_ITEM_SIZE = 32;
 const OUTLINE_OFFSET = 0.5;
-const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) / 80)`;
+const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.6)`;
 
 export const TrackItem = () => {
   const [actionsDropdownOpen, setActionsDropdownOpen] = useState(false);
