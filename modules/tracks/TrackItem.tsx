@@ -1,27 +1,12 @@
 import { css } from "@/styles/css";
-import {
-  Box,
-  Flex,
-  IconButton,
-  Text,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuRoot,
-  DropdownMenuTrigger,
-} from "@radix-ui/themes";
+import { Box, Flex, IconButton, Link, Text } from "@radix-ui/themes";
 import { keyframes, styled } from "@stitches/react";
 import { useState } from "react";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
-import {
-  MdLink,
-  MdPause,
-  MdPlayArrow,
-  MdPlaylistAdd,
-  MdPlaylistPlay,
-  MdShare,
-} from "react-icons/md";
+import { MdPause, MdPlayArrow } from "react-icons/md";
 import { RxDotsHorizontal } from "react-icons/rx";
 import { PiVinylRecordLight } from "react-icons/pi";
+import { ActionsDropdown } from "./ActionsDropdown";
 
 const spin = keyframes({
   to: { transform: "rotate(360deg)" },
@@ -40,6 +25,7 @@ const TrackIndexWrapper = styled("span", {
         "& svg": {
           display: "block",
           animation: `${spin} 1s linear infinite`,
+          color: "var(--accent-11)",
         },
 
         "[data-track-index]": {
@@ -57,7 +43,7 @@ const TrackIndexWrapper = styled("span", {
 });
 
 const StyledFlex = styled(Flex, {
-  "&:not(:hover)": {
+  "&:not(:hover, :focus-within)": {
     "[data-play-button]": {
       opacity: 0,
       clip: "rect(0 0 0 0)",
@@ -69,7 +55,7 @@ const StyledFlex = styled(Flex, {
     },
   },
 
-  "&:hover": {
+  "&:hover, &:focus-within": {
     "[data-track-index-wrapper]": {
       opacity: 0,
       clip: "rect(0 0 0 0)",
@@ -89,12 +75,6 @@ const PlayIconButton = styled(IconButton, {
   "&:hover": {
     color: "var(--gray-12)",
   },
-});
-
-const StyledDropdownMenuItem = styled(DropdownMenuItem, {
-  justifyContent: "start",
-  gap: "var(--space-2)",
-  paddingLeft: "var(--space-2)",
 });
 
 const TRACK_ITEM_SIZE = 32;
@@ -164,51 +144,33 @@ export const TrackItem = () => {
           />
         </Box>
         <Flex direction="column" justify="between">
-          <Text size="1" weight="medium">
+          <Link size="1" weight="medium" color={playing ? undefined : "gray"}>
             Track Title
-          </Text>
-          <Text size="1" color="gray">
+          </Link>
+          <Link size="1" color="gray">
             Artist Name
-          </Text>
+          </Link>
         </Flex>
       </Flex>
       <Flex gap="4" align="center">
         <Text size="1">2:36</Text>
         <Flex align="center" gap="3">
-          <IconButton onClick={() => setLiked(!liked)} variant="ghost" size="1">
+          <IconButton
+            onClick={() => setLiked(!liked)}
+            variant="ghost"
+            size="1"
+            color={liked ? undefined : "gray"}
+          >
             {liked ? <IoMdHeart /> : <IoMdHeartEmpty />}
           </IconButton>
-          <DropdownMenuRoot
-            onOpenChange={(open) =>
-              open
-                ? setActionsDropdownOpen(true)
-                : setActionsDropdownOpen(false)
-            }
+          <ActionsDropdown
+            open={actionsDropdownOpen}
+            setOpen={setActionsDropdownOpen}
           >
-            <DropdownMenuTrigger>
-              <IconButton variant="ghost" size="1">
-                <RxDotsHorizontal />
-              </IconButton>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent data-track-actions-dropdown>
-              <StyledDropdownMenuItem>
-                <MdShare />
-                Share
-              </StyledDropdownMenuItem>
-              <StyledDropdownMenuItem>
-                <MdLink />
-                Copy link
-              </StyledDropdownMenuItem>
-              <StyledDropdownMenuItem>
-                <MdPlaylistAdd />
-                Add to playlist
-              </StyledDropdownMenuItem>
-              <StyledDropdownMenuItem>
-                <MdPlaylistPlay />
-                Add to queue
-              </StyledDropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenuRoot>
+            <IconButton variant="ghost" size="1" color="gray">
+              <RxDotsHorizontal />
+            </IconButton>
+          </ActionsDropdown>
         </Flex>
       </Flex>
     </StyledFlex>
