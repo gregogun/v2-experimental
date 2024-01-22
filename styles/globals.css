@@ -19,3 +19,7 @@ ul {
 .rt-BaseMenuViewport {
   padding: var(--space-2);
 }
+
+.rt-BaseMenuContent {
+  background-color: var(--color-panel);
+}
