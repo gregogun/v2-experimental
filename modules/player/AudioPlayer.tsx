@@ -178,10 +178,10 @@ export const AudioPlayer = () => {
         height: "max-content",
         padding: "var(--space-2)",
         position: "fixed",
-        // zIndex: "var()",
         bottom: 0,
-        // backgroundColor: "var(--color-panel)",
-        // backdropFilter: "blur(10px)",
+        left: 0,
+        right: 0,
+        backdropFilter: "blur(10px)",
         maxHeight: "max-content",
         borderTop: "1px solid var(--gray-5)",
       })}
@@ -343,7 +343,6 @@ export const AudioPlayer = () => {
               onKeyDown={handleKeyDown as any}
               defaultValue={[0]}
               size="1"
-              variant="soft"
               value={scrubbing ? [scrubbedValue as number] : [currentTime]}
               max={duration}
               step={progressStep}
@@ -383,7 +382,6 @@ export const AudioPlayer = () => {
               onValueChange={(e) => handleValueChange(e)}
               onKeyDown={handleKeyDown as any}
               size="1"
-              variant="soft"
             />
           </Box>
         </Flex>

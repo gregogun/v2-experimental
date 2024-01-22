@@ -40,3 +40,11 @@ ul {
 .rt-SliderRoot:where(.rt-r-size-1) {
   --slider-track-size: calc(var(--space-1) * 0.9)
 }
+
+.rt-SliderRoot:where(.rt-variant-surface) :where(.rt-SliderTrack) {
+  box-shadow: none;
+}
+
+.rt-SliderRoot:where(.rt-variant-surface) :where(.rt-SliderRange) {
+  box-shadow: none;
+}
