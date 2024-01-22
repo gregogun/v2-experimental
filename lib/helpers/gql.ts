@@ -1,6 +1,5 @@
-import { appConfig } from "@/config";
 import { GQLQuery } from "@/types/query";
-import { userPreferredGateway } from "@/utils";
+import { gateway } from "@/utils";
 import arweaveGql, { TagFilter } from "arweave-graphql";
 
 /**
@@ -11,21 +10,19 @@ export const gql = async ({ variables }: GQLQuery) => {
   try {
     const defaultTags: TagFilter[] = [
       {
-        name: "dApp-Name",
+        name: "DApp-Name",
         values: ["arcadia-v2"],
       },
-      {
-        name: "Variant",
-        values: ["0.0.1"],
-      },
+      // {
+      //   name: "Variant",
+      //   values: ["0.0.1"],
+      // },
     ];
 
     variables.tags = variables.tags || [];
     const mergedTags = [...defaultTags, ...(variables.tags as TagFilter[])];
 
-    const res = await arweaveGql(
-      `${userPreferredGateway() || appConfig.defaultGateway}/graphql`
-    ).getTransactions({
+    const res = await arweaveGql(`${gateway()}/graphql`).getTransactions({
       ...variables,
       tags: mergedTags,
     });

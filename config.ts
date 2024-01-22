@@ -5,4 +5,7 @@ export const appConfig = {
   testArtworkSrc:
     "https://arweave.net/sRrFwi8F4Zel0U5fxTsbAo7yEDTQck9Fcrgob8IYjUc",
   defaultGateway: "https://arweave.net",
+  acceptedFileTypes: {
+    streamableAudio: ["audio/mp3", "audio/ogg", "audio/aac", "audio/x-m4a"],
+  },
 };
