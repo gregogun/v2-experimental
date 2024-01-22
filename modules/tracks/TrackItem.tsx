@@ -1,27 +1,12 @@
 import { css } from "@/styles/css";
-import {
-  Box,
-  Flex,
-  IconButton,
-  Text,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuRoot,
-  DropdownMenuTrigger,
-} from "@radix-ui/themes";
+import { Box, Flex, IconButton, Text } from "@radix-ui/themes";
 import { keyframes, styled } from "@stitches/react";
 import { useState } from "react";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
-import {
-  MdLink,
-  MdPause,
-  MdPlayArrow,
-  MdPlaylistAdd,
-  MdPlaylistPlay,
-  MdShare,
-} from "react-icons/md";
+import { MdPause, MdPlayArrow } from "react-icons/md";
 import { RxDotsHorizontal } from "react-icons/rx";
 import { PiVinylRecordLight } from "react-icons/pi";
+import { ActionsDropdown } from "./ActionsDropdown";
 
 const spin = keyframes({
   to: { transform: "rotate(360deg)" },
@@ -89,12 +74,6 @@ const PlayIconButton = styled(IconButton, {
   "&:hover": {
     color: "var(--gray-12)",
   },
-});
-
-const StyledDropdownMenuItem = styled(DropdownMenuItem, {
-  justifyContent: "start",
-  gap: "var(--space-2)",
-  paddingLeft: "var(--space-2)",
 });
 
 const TRACK_ITEM_SIZE = 32;
@@ -175,40 +154,22 @@ export const TrackItem = () => {
       <Flex gap="4" align="center">
         <Text size="1">2:36</Text>
         <Flex align="center" gap="3">
-          <IconButton onClick={() => setLiked(!liked)} variant="ghost" size="1">
+          <IconButton
+            onClick={() => setLiked(!liked)}
+            variant="ghost"
+            size="1"
+            color={liked ? undefined : "gray"}
+          >
             {liked ? <IoMdHeart /> : <IoMdHeartEmpty />}
           </IconButton>
-          <DropdownMenuRoot
-            onOpenChange={(open) =>
-              open
-                ? setActionsDropdownOpen(true)
-                : setActionsDropdownOpen(false)
-            }
+          <ActionsDropdown
+            open={actionsDropdownOpen}
+            setOpen={setActionsDropdownOpen}
           >
-            <DropdownMenuTrigger>
-              <IconButton variant="ghost" size="1">
-                <RxDotsHorizontal />
-              </IconButton>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent data-track-actions-dropdown>
-              <StyledDropdownMenuItem>
-                <MdShare />
-                Share
-              </StyledDropdownMenuItem>
-              <StyledDropdownMenuItem>
-                <MdLink />
-                Copy link
-              </StyledDropdownMenuItem>
-              <StyledDropdownMenuItem>
-                <MdPlaylistAdd />
-                Add to playlist
-              </StyledDropdownMenuItem>
-              <StyledDropdownMenuItem>
-                <MdPlaylistPlay />
-                Add to queue
-              </StyledDropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenuRoot>
+            <IconButton variant="ghost" size="1" color="gray">
+              <RxDotsHorizontal />
+            </IconButton>
+          </ActionsDropdown>
         </Flex>
       </Flex>
     </StyledFlex>

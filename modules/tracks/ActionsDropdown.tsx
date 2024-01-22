@@ -5,6 +5,7 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/themes";
 import { styled } from "@stitches/react";
+import { Dispatch, SetStateAction } from "react";
 import { MdLink, MdPlaylistAdd, MdPlaylistPlay, MdShare } from "react-icons/md";
 
 const StyledDropdownMenuItem = styled(DropdownMenuItem, {
@@ -14,12 +15,17 @@ const StyledDropdownMenuItem = styled(DropdownMenuItem, {
 
 interface ActionsDropdownProps {
   open: boolean;
-  onClose: () => void;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  children: React.ReactNode;
 }
 
 export const ActionsDropdown = (props: ActionsDropdownProps) => {
   return (
-    <DropdownMenuRoot open={props.open} onOpenChange={props.onClose}>
+    <DropdownMenuRoot
+      open={props.open}
+      onOpenChange={(open) => props.setOpen(open ? true : false)}
+    >
+      <DropdownMenuTrigger>{props.children}</DropdownMenuTrigger>
       <DropdownMenuContent data-track-actions-dropdown>
         <StyledDropdownMenuItem>
           <MdShare />

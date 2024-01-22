@@ -1,33 +1,11 @@
 import { css } from "@/styles/css";
-import { css as stitchesCss } from "@stitches/react";
-import { DotsHorizontalIcon, HeartIcon, PlayIcon } from "@radix-ui/react-icons";
-import {
-  AspectRatio,
-  Box,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuRoot,
-  DropdownMenuTrigger,
-  Flex,
-  IconButton,
-  Text,
-} from "@radix-ui/themes";
-import {
-  MdLink,
-  MdPause,
-  MdPlayArrow,
-  MdPlaylistAdd,
-  MdPlaylistPlay,
-  MdShare,
-} from "react-icons/md";
-import { IoMdHeart } from "react-icons/io";
+import { Box, Flex, IconButton, Text } from "@radix-ui/themes";
+import { MdPause, MdPlayArrow } from "react-icons/md";
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { styled } from "@stitches/react";
 import { useState } from "react";
-
-const StyledDropdownMenuItem = styled(DropdownMenuItem, {
-  justifyContent: "start",
-  gap: "var(--space-2)",
-});
+import { ActionsDropdown } from "./ActionsDropdown";
+import { RxDotsHorizontal } from "react-icons/rx";
 
 const ActionsOverlay = styled(Flex, {
   width: "100%",
@@ -52,19 +30,20 @@ const ActionsOverlay = styled(Flex, {
 });
 
 const AlphaIconButton = styled(IconButton, {
-  backgroundColor: "transparent",
   color: "var(--white-a10)",
 
   "&:hover": {
+    backgroundColor: "var(--white-a4)",
     color: "var(--white-a12)",
   },
 
   variants: {
     liked: {
       true: {
-        color: "var(--red-9)",
+        color: "var(--accent-9)",
         "&:hover": {
-          color: "var(--red-10)",
+          backgroundColor: "var(--white-a4)",
+          color: "var(--accent-10)",
         },
       },
     },
@@ -90,6 +69,7 @@ const OUTLINE_OFFSET = 0.5;
 const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.6)`;
 
 export const TrackCard = () => {
+  const [actionsDropdownOpen, setActionsDropdownOpen] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [liked, setLiked] = useState(false);
 
@@ -117,7 +97,6 @@ export const TrackCard = () => {
             <ActionsOverlay justify="between" align="end" gap="3">
               <AlphaPlayIconButton
                 onClick={() => setPlaying(!playing)}
-                variant="soft"
                 size="3"
               >
                 {playing ? <MdPause /> : <MdPlayArrow />}
@@ -130,33 +109,16 @@ export const TrackCard = () => {
                   variant="ghost"
                   highContrast
                 >
-                  <IoMdHeart width={15} height={15} />
+                  {liked ? <IoMdHeart /> : <IoMdHeartEmpty />}
                 </AlphaIconButton>
-                <DropdownMenuRoot>
-                  <DropdownMenuTrigger>
-                    <AlphaIconButton size="2" variant="ghost" highContrast>
-                      <DotsHorizontalIcon />
-                    </AlphaIconButton>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent data-track-actions-dropdown>
-                    <StyledDropdownMenuItem>
-                      <MdShare />
-                      Share
-                    </StyledDropdownMenuItem>
-                    <StyledDropdownMenuItem>
-                      <MdLink />
-                      Copy link
-                    </StyledDropdownMenuItem>
-                    <StyledDropdownMenuItem>
-                      <MdPlaylistAdd />
-                      Add to playlist
-                    </StyledDropdownMenuItem>
-                    <StyledDropdownMenuItem>
-                      <MdPlaylistPlay />
-                      Add to queue
-                    </StyledDropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenuRoot>
+                <ActionsDropdown
+                  open={actionsDropdownOpen}
+                  setOpen={setActionsDropdownOpen}
+                >
+                  <AlphaIconButton variant="ghost" size="1" highContrast>
+                    <RxDotsHorizontal />
+                  </AlphaIconButton>
+                </ActionsDropdown>
               </Flex>
             </ActionsOverlay>
             <img
