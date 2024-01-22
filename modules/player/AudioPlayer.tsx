@@ -236,7 +236,7 @@ export const AudioPlayer = () => {
           align="center"
           gap="3"
           style={css({
-            margin: "var(--space-2) auto",
+            margin: "var(--space-1) auto",
           })}
         >
           <IconButton
