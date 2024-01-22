@@ -58,20 +58,6 @@ const AlphaIconButton = styled(IconButton, {
   },
 });
 
-const AlphaPlayIconButton = styled(IconButton, {
-  backgroundColor: "var(--white-a3)",
-  color: "var(--white-a11)",
-
-  "&:hover": {
-    backgroundColor: "var(--white-a4)",
-    color: "var(--white-a12)",
-  },
-
-  "&:active": {
-    backgroundColor: "var(--white-a5)",
-  },
-});
-
 const TRACK_ITEM_SIZE = 220;
 const OUTLINE_OFFSET = 0.5;
 const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.6)`;
@@ -108,12 +94,9 @@ export const TrackCard = () => {
               gap="3"
               showOverlay={actionsDropdownOpen}
             >
-              <AlphaPlayIconButton
-                onClick={() => setPlaying(!playing)}
-                size="3"
-              >
+              <IconButton onClick={() => setPlaying(!playing)} size="3">
                 {playing ? <MdPause /> : <MdPlayArrow />}
-              </AlphaPlayIconButton>
+              </IconButton>
               <Flex align="center" gap="3">
                 <AlphaIconButton
                   onClick={() => setLiked(!liked)}
