@@ -3,8 +3,11 @@ import { gql } from "../helpers/gql";
 import { appConfig } from "@/config";
 import { setTrackInfo } from "../helpers/setTrackInfo";
 import { TransactionEdge } from "arweave-graphql";
+import { Track } from "@/types";
 
-export const getTrack = async ({ txid }: GetTrack) => {
+export const getTrack = async ({
+  txid,
+}: GetTrack): Promise<Track | undefined> => {
   try {
     const res = await gql({
       variables: {
@@ -25,7 +28,7 @@ export const getTrack = async ({ txid }: GetTrack) => {
     if (track.length) {
       return track[0];
     } else {
-      return {};
+      return undefined;
     }
   } catch (error: any) {
     console.error(error);

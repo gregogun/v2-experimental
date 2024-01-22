@@ -15,15 +15,13 @@ export type License = {
 };
 
 export type Track = {
-  title: string | undefined;
-  description?: string;
+  title: string;
   creator: string;
-  artworkId: string | undefined;
-  src: string;
+  audioSrc: string;
+  thumbnailSrc: string;
+  artworkSrc: string;
   txid: string;
-  dateCreated?: number;
-  license?: License;
-  cursor?: string;
+  cursor: string;
 };
 
 export type Tracklist = Track[];

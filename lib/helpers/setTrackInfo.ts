@@ -4,6 +4,10 @@ import { TransactionEdge } from "arweave-graphql";
 export const setTrackInfo = (edge: TransactionEdge) => {
   const title = edge.node.tags.find((x) => x.name === "Title")?.value;
 
+  if (!title) {
+    return;
+  }
+
   let creator: string;
 
   try {
