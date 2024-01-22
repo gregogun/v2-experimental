@@ -42,7 +42,7 @@ const TrackIndexWrapper = styled("span", {
 });
 
 const StyledFlex = styled(Flex, {
-  "&:not(:hover)": {
+  "&:not(:hover, :focus-within)": {
     "[data-play-button]": {
       opacity: 0,
       clip: "rect(0 0 0 0)",
@@ -54,7 +54,7 @@ const StyledFlex = styled(Flex, {
     },
   },
 
-  "&:hover": {
+  "&:hover, &:focus-within": {
     "[data-track-index-wrapper]": {
       opacity: 0,
       clip: "rect(0 0 0 0)",
