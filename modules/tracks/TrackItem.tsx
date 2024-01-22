@@ -25,6 +25,7 @@ const TrackIndexWrapper = styled("span", {
         "& svg": {
           display: "block",
           animation: `${spin} 1s linear infinite`,
+          color: "var(--accent-11)",
         },
 
         "[data-track-index]": {

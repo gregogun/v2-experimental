@@ -7,9 +7,7 @@ export const TrackGrid = () => {
     <Grid p="5" gap="9" asChild>
       <ul>
         <TrackCard />
-        <Box style={{ maxWidth: 500 }}>
-          <TrackItem />
-        </Box>
+        <TrackItem />
       </ul>
     </Grid>
   );
