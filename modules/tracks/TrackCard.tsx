@@ -122,7 +122,7 @@ export const TrackCard = ({ track }: TrackCardProps) => {
               justify="between"
               align="end"
               gap="3"
-              showOverlay={actionsDropdownOpen}
+              showOverlay={actionsDropdownOpen || isPlaying}
             >
               <IconButton onClick={handleClick} size="3">
                 {isPlaying ? <MdPause /> : <MdPlayArrow />}
