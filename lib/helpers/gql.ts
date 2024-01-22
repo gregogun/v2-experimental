@@ -3,6 +3,10 @@ import { GQLQuery } from "@/types/query";
 import { userPreferredGateway } from "@/utils";
 import arweaveGql, { TagFilter } from "arweave-graphql";
 
+/**
+ *
+ * @description Intended for simple, non-parallel queries.
+ */
 export const gql = async ({ variables }: GQLQuery) => {
   try {
     const defaultTags: TagFilter[] = [
