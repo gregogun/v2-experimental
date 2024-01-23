@@ -10,10 +10,13 @@ import {
   Flex,
   IconButton,
   Text,
+  VisuallyHidden,
 } from "@radix-ui/themes";
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
-import { BsTelegram, BsTwitterX, BsWhatsapp } from "react-icons/bs";
-import { RxCross2 } from "react-icons/rx";
+import { Dispatch, MutableRefObject, SetStateAction, useState } from "react";
+import { BsCopy, BsTelegram, BsTwitterX, BsWhatsapp } from "react-icons/bs";
+import { MdLink } from "react-icons/md";
+import { RxCheck, RxCross2 } from "react-icons/rx";
+import { toast } from "sonner";
 
 const HEADING_SIZE = 4;
 const TRACK_ARTWORK_SIZE = 80;
@@ -31,6 +34,7 @@ interface ShareDialogProps {
 }
 
 export const ShareDialog = (props: ShareDialogProps) => {
+  const [isCopied, setIsCopied] = useState(false);
   const SHARE_TEXT_TWITTER = `Check out this track ${props.track.title} on @arcadia_sound \n \n`;
   const SHARE_TEXT = `Check out this track ${props.track.title} on Arcadia \n \n`;
   const origin = window.location.origin;
@@ -42,6 +46,28 @@ export const ShareDialog = (props: ShareDialogProps) => {
   const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(
     SHARE_TEXT
   )}%20${encodeURIComponent(SHARE_URL)}`;
+  const telegramUrl = `https://telegram.me/share/url?url=${SHARE_URL}&text=${SHARE_TEXT}`;
+
+  const handleCopy = async () => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(
+        `${origin}/#/track?tx=${props.track.txid}`
+      );
+      toast.success("Link copied to clipboard", {
+        style: css({ padding: "var(--space-3)", zIndex: "var(--z-toast)" }),
+      });
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to copy link to clipboard", {
+        style: css({ padding: "var(--space-3)" }),
+      });
+    }
+  };
 
   return (
     <DialogRoot
@@ -54,7 +80,7 @@ export const ShareDialog = (props: ShareDialogProps) => {
       <DialogTrigger>{props.children}</DialogTrigger>
       <DialogContent style={css({ maxWidth: 500, position: "relative" })}>
         <DialogTitle size={`${HEADING_SIZE}`}>
-          Share this sound with the world
+          Share this song with the world
         </DialogTitle>
 
         <DialogClose>
@@ -122,23 +148,44 @@ export const ShareDialog = (props: ShareDialogProps) => {
         </Flex>
 
         <Flex mt="5" direction="column" gap="3" align="center">
-          <Text size="2" color="gray">
-            Share this track via:{" "}
-          </Text>
-          <Flex align="center" justify="center" gap="5">
-            <IconButton size="4" variant="soft" asChild>
-              <a href={twitterUrl}>
-                <BsTwitterX />
-              </a>
-            </IconButton>
-            <IconButton size="4" variant="soft" asChild>
-              <a href={whatsappUrl}>
-                <BsWhatsapp />
-              </a>
-            </IconButton>
-            <IconButton size="4" variant="soft">
-              <BsTelegram />
-            </IconButton>
+          <Text size="2">Share this track via: </Text>
+          <Flex align="center" justify="center" gap="5" asChild>
+            <ul>
+              <li>
+                <IconButton size="4" variant="outline" asChild>
+                  <a href={twitterUrl}>
+                    <VisuallyHidden>X / Twitter</VisuallyHidden>
+                    <BsTwitterX />
+                  </a>
+                </IconButton>
+              </li>
+              <li>
+                <IconButton size="4" variant="outline" asChild>
+                  <a href={whatsappUrl}>
+                    <VisuallyHidden>Whatsapp</VisuallyHidden>
+                    <BsWhatsapp />
+                  </a>
+                </IconButton>
+              </li>
+              <li>
+                <IconButton size="4" variant="outline" asChild>
+                  <a href={telegramUrl}>
+                    <VisuallyHidden>Telegram</VisuallyHidden>
+                    <BsTelegram />
+                  </a>
+                </IconButton>
+              </li>
+              <li>
+                <IconButton
+                  onClick={handleCopy}
+                  aria-label="Copy song link"
+                  size="4"
+                  variant={isCopied ? "solid" : "outline"}
+                >
+                  {isCopied ? <RxCheck /> : <BsCopy />}
+                </IconButton>
+              </li>
+            </ul>
           </Flex>
         </Flex>
       </DialogContent>
