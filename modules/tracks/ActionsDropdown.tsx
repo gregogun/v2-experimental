@@ -1,5 +1,5 @@
 import { css } from "@/styles/css";
-import { Track } from "@/types";
+import { DialogOpenProps, Track } from "@/types";
 import {
   DropdownMenuContent,
   DropdownMenuItem,
@@ -7,9 +7,10 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/themes";
 import { styled } from "@stitches/react";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, forwardRef, useRef, useState } from "react";
 import { MdLink, MdPlaylistAdd, MdPlaylistPlay, MdShare } from "react-icons/md";
 import { toast } from "sonner";
+import { ShareDialog } from "./ShareDialog";
 
 const StyledDropdownMenuItem = styled(DropdownMenuItem, {
   justifyContent: "start",
@@ -24,6 +25,11 @@ interface ActionsDropdownProps {
 }
 
 export const ActionsDropdown = (props: ActionsDropdownProps) => {
+  const [showDialog, setShowDialog] = useState<DialogOpenProps>({
+    open: false,
+  });
+  const dropdownTriggerRef = useRef<HTMLButtonElement | null>(null);
+
   const handleCopy = async () => {
     if (typeof window === "undefined") {
       return;
@@ -49,12 +55,21 @@ export const ActionsDropdown = (props: ActionsDropdownProps) => {
       open={props.open}
       onOpenChange={(open) => props.setOpen(open ? true : false)}
     >
-      <DropdownMenuTrigger>{props.children}</DropdownMenuTrigger>
-      <DropdownMenuContent data-track-actions-dropdown>
-        <StyledDropdownMenuItem>
-          <MdShare />
-          Share
-        </StyledDropdownMenuItem>
+      <DropdownMenuTrigger ref={dropdownTriggerRef}>
+        {props.children}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent data-track-actions-dropdown hidden={showDialog.open}>
+        <ShareDialog
+          track={props.track}
+          open={showDialog.name === "share" && showDialog.open}
+          setOpen={setShowDialog}
+          triggerRef={dropdownTriggerRef}
+        >
+          <StyledDropdownMenuItem onSelect={(event) => event.preventDefault()}>
+            <MdShare />
+            Share
+          </StyledDropdownMenuItem>
+        </ShareDialog>
         <StyledDropdownMenuItem onSelect={handleCopy}>
           <MdLink />
           Copy link
