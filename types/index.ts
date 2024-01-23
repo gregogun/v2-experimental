@@ -3,6 +3,12 @@ export type IconProps = {
   height?: number | string | undefined;
 };
 
+export interface DialogOpenProps {
+  // name is for if we have multiple dialogs inside dropdown
+  name?: "share";
+  open: boolean;
+}
+
 export type License = {
   tx: string | undefined;
   access: string | undefined;
