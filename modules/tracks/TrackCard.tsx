@@ -6,6 +6,8 @@ import { styled } from "@stitches/react";
 import { useState } from "react";
 import { ActionsDropdown } from "./ActionsDropdown";
 import { RxDotsHorizontal } from "react-icons/rx";
+import { Track } from "@/types";
+import { useAudioPlayer } from "@/hooks/useAudioPlayer";
 
 const ActionsOverlay = styled(Flex, {
   width: "100%",
@@ -62,10 +64,38 @@ const TRACK_ITEM_SIZE = 220;
 const OUTLINE_OFFSET = 0.5;
 const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.6)`;
 
-export const TrackCard = () => {
+interface TrackCardProps {
+  track: Track;
+}
+
+export const TrackCard = ({ track }: TrackCardProps) => {
   const [actionsDropdownOpen, setActionsDropdownOpen] = useState(false);
-  const [playing, setPlaying] = useState(false);
   const [liked, setLiked] = useState(false);
+  const {
+    playing,
+    togglePlaying,
+    currentTrackId,
+    setTracklist,
+    setCurrentTrackId,
+    setCurrentTrackIndex,
+    handlePlayPause,
+  } = useAudioPlayer();
+
+  const isPlaying = playing && currentTrackId === track.txid;
+
+  const handleClick = () => {
+    handlePlayPause?.();
+
+    if (currentTrackId === track.txid) {
+      togglePlaying?.();
+    } else {
+      // if (trackIndex >= 0) {
+      setTracklist?.([track], 0);
+      setCurrentTrackId?.(track.txid);
+      setCurrentTrackIndex?.(0);
+      // }
+    }
+  };
 
   return (
     <Box asChild>
@@ -92,10 +122,10 @@ export const TrackCard = () => {
               justify="between"
               align="end"
               gap="3"
-              showOverlay={actionsDropdownOpen}
+              showOverlay={actionsDropdownOpen || isPlaying}
             >
-              <IconButton onClick={() => setPlaying(!playing)} size="3">
-                {playing ? <MdPause /> : <MdPlayArrow />}
+              <IconButton onClick={handleClick} size="3">
+                {isPlaying ? <MdPause /> : <MdPlayArrow />}
               </IconButton>
               <Flex align="center" gap="3">
                 <AlphaIconButton
@@ -118,8 +148,8 @@ export const TrackCard = () => {
               </Flex>
             </ActionsOverlay>
             <img
-              src="https://images.unsplash.com/photo-1479030160180-b1860951d696?&auto=format&fit=crop&w=1200&q=80"
-              alt="A house in a forest"
+              src={track.thumbnailSrc}
+              alt={`Cover artwork for ${track.title}`}
               style={css({
                 objectFit: "cover",
                 width: "100%",
@@ -128,11 +158,26 @@ export const TrackCard = () => {
             />
           </Box>
           <Flex direction="column">
-            <Link size="1" color={playing ? undefined : "gray"}>
-              Track Title
+            <Link
+              size="1"
+              weight="medium"
+              style={css({
+                color: isPlaying ? "var(--accent-11)" : "var(--gray-12)",
+              })}
+            >
+              {track.title}
             </Link>
-            <Link size="1" color="gray">
-              Artist Name
+            <Link
+              size="1"
+              color="gray"
+              style={css({
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                maxWidth: "24ch",
+              })}
+            >
+              {track.creator}
             </Link>
           </Flex>
         </Flex>

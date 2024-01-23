@@ -1,6 +1,8 @@
 import { AppHeader } from "@/modules/layout/AppHeader";
 import { AudioPlayer } from "@/modules/player/AudioPlayer";
 import { TrackGrid } from "@/modules/tracks/TrackGrid";
+import { css } from "@/styles/css";
+import { Box } from "@radix-ui/themes";
 import Head from "next/head";
 
 export default function Home() {
@@ -13,6 +15,13 @@ export default function Home() {
         <link rel="icon" href="favicon.ico" />
       </Head>
       <AppHeader />
+      <Box
+        style={css({
+          height: 1,
+          backgroundColor: "var(--slate-5)",
+          marginInline: "-20px",
+        })}
+      />
       <TrackGrid />
       <AudioPlayer />
     </>

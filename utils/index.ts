@@ -1,3 +1,5 @@
+import { appConfig } from "@/config";
+
 interface AbbreviateAddressOptions {
   startChars?: number;
   endChars?: number;
@@ -38,6 +40,16 @@ export const formatTime = (time: number): string => {
 export const userPreferredGateway = () => {
   if (typeof window !== undefined) {
     return localStorage.getItem("gateway");
+  }
+};
+
+export const gateway = () => {
+  if (typeof window !== undefined) {
+    const preferredOrDefaultGateway =
+      localStorage.getItem("gateway") || appConfig.defaultGateway;
+    return preferredOrDefaultGateway;
+  } else {
+    return appConfig.defaultGateway;
   }
 };
 
