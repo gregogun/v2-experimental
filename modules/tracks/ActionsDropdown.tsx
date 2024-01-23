@@ -1,3 +1,5 @@
+import { css } from "@/styles/css";
+import { Track } from "@/types";
 import {
   DropdownMenuContent,
   DropdownMenuItem,
@@ -7,6 +9,7 @@ import {
 import { styled } from "@stitches/react";
 import { Dispatch, SetStateAction } from "react";
 import { MdLink, MdPlaylistAdd, MdPlaylistPlay, MdShare } from "react-icons/md";
+import { toast } from "sonner";
 
 const StyledDropdownMenuItem = styled(DropdownMenuItem, {
   justifyContent: "start",
@@ -14,12 +17,33 @@ const StyledDropdownMenuItem = styled(DropdownMenuItem, {
 });
 
 interface ActionsDropdownProps {
+  track: Track;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   children: React.ReactNode;
 }
 
 export const ActionsDropdown = (props: ActionsDropdownProps) => {
+  const handleCopy = async () => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    try {
+      const origin = window.location.origin;
+      await navigator.clipboard.writeText(
+        `${origin}/track?tx=${props.track.txid}`
+      );
+      toast.success("Link copied to clipboard", {
+        style: css({ padding: "var(--space-3)" }),
+      });
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to copy link to clipboard", {
+        style: css({ padding: "var(--space-3)" }),
+      });
+    }
+  };
+
   return (
     <DropdownMenuRoot
       open={props.open}
@@ -31,7 +55,7 @@ export const ActionsDropdown = (props: ActionsDropdownProps) => {
           <MdShare />
           Share
         </StyledDropdownMenuItem>
-        <StyledDropdownMenuItem>
+        <StyledDropdownMenuItem onSelect={handleCopy}>
           <MdLink />
           Copy link
         </StyledDropdownMenuItem>

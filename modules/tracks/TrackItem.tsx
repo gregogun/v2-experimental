@@ -205,6 +205,7 @@ export const TrackItem = ({ track }: TrackCardProps) => {
             {liked ? <IoMdHeart /> : <IoMdHeartEmpty />}
           </IconButton>
           <ActionsDropdown
+            track={track}
             open={actionsDropdownOpen}
             setOpen={setActionsDropdownOpen}
           >
