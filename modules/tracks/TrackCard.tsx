@@ -138,6 +138,7 @@ export const TrackCard = ({ track }: TrackCardProps) => {
                   {liked ? <IoMdHeart /> : <IoMdHeartEmpty />}
                 </AlphaIconButton>
                 <ActionsDropdown
+                  track={track}
                   open={actionsDropdownOpen}
                   setOpen={setActionsDropdownOpen}
                 >
