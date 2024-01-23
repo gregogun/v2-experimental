@@ -8,7 +8,6 @@ import {
   DialogTitle,
   DialogTrigger,
   Flex,
-  Heading,
   IconButton,
   Text,
 } from "@radix-ui/themes";
@@ -21,6 +20,8 @@ const TRACK_ARTWORK_SIZE = 80;
 const OUTLINE_OFFSET = 0.5;
 const TRACK_ARTWORK_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.6)`;
 
+const TWITTER_WEB_INTENT_URL = "https://twitter.com/intent/tweet";
+
 interface ShareDialogProps {
   track: Track;
   open: boolean;
@@ -30,6 +31,18 @@ interface ShareDialogProps {
 }
 
 export const ShareDialog = (props: ShareDialogProps) => {
+  const SHARE_TEXT_TWITTER = `Check out this track ${props.track.title} on @arcadia_sound \n \n`;
+  const SHARE_TEXT = `Check out this track ${props.track.title} on Arcadia \n \n`;
+  const origin = window.location.origin;
+  const SHARE_URL = `${origin}/#/track?tx=${props.track.txid}`;
+
+  const twitterUrl = `${TWITTER_WEB_INTENT_URL}?url=${encodeURIComponent(
+    SHARE_URL
+  )}&text=${encodeURIComponent(SHARE_TEXT_TWITTER)}`;
+  const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(
+    SHARE_TEXT
+  )}%20${encodeURIComponent(SHARE_URL)}`;
+
   return (
     <DialogRoot
       open={props.open}
@@ -113,11 +126,15 @@ export const ShareDialog = (props: ShareDialogProps) => {
             Share this track via:{" "}
           </Text>
           <Flex align="center" justify="center" gap="5">
-            <IconButton size="4" variant="soft">
-              <BsTwitterX />
+            <IconButton size="4" variant="soft" asChild>
+              <a href={twitterUrl}>
+                <BsTwitterX />
+              </a>
             </IconButton>
-            <IconButton size="4" variant="soft">
-              <BsWhatsapp />
+            <IconButton size="4" variant="soft" asChild>
+              <a href={whatsappUrl}>
+                <BsWhatsapp />
+              </a>
             </IconButton>
             <IconButton size="4" variant="soft">
               <BsTelegram />
