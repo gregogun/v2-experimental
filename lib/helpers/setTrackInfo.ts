@@ -2,11 +2,8 @@ import { gateway } from "@/utils";
 import { TransactionEdge } from "arweave-graphql";
 
 export const setTrackInfo = (edge: TransactionEdge) => {
-  const title = edge.node.tags.find((x) => x.name === "Title")?.value;
-
-  if (!title) {
-    return;
-  }
+  // casting as the filter in query func is/should be ensuring value exists
+  const title = edge.node.tags.find((x) => x.name === "Title")?.value as string;
 
   let creator: string;
 
@@ -24,13 +21,11 @@ export const setTrackInfo = (edge: TransactionEdge) => {
     creator = edge.node.owner.address;
   }
 
-  const thumbnailId = edge.node.tags.find((x) => x.name === "Thumbnail")?.value;
-
-  const artworkId = edge.node.tags.find((x) => x.name === "Artwork")?.value;
-
-  if (!thumbnailId || !artworkId) {
-    return;
-  }
+  // casting as the filter in query func is/should be ensuring value exists
+  const thumbnailId = edge.node.tags.find((x) => x.name === "Thumbnail")
+    ?.value as string;
+  const artworkId = edge.node.tags.find((x) => x.name === "Artwork")
+    ?.value as string;
 
   const thumbnailSrc = gateway() + "/" + thumbnailId;
   const artworkSrc = gateway() + "/" + artworkId;
