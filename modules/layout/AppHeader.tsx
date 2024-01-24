@@ -29,8 +29,8 @@ export const AppHeader = () => {
           <AppLogo />
         </Link>
         {
-          <Button variant="outline" onClick={connected ? disconnect : connect}>
-            {connected ? "Sign out / Disconnect" : "Sign in / Connect"}
+          <Button variant="surface" onClick={connected ? disconnect : connect}>
+            {connected ? "Disconnect" : "Connect"}
           </Button>
         }
       </header>
