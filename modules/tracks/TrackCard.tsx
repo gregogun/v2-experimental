@@ -60,15 +60,17 @@ const AlphaIconButton = styled(IconButton, {
   },
 });
 
-const TRACK_ITEM_SIZE = 220;
+const TRACK_ITEM_SIZE = 180;
 const OUTLINE_OFFSET = 0.5;
 const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.6)`;
 
 interface TrackCardProps {
   track: Track;
+  tracks: Track[];
+  trackIndex: number;
 }
 
-export const TrackCard = ({ track }: TrackCardProps) => {
+export const TrackCard = ({ track, tracks, trackIndex }: TrackCardProps) => {
   const [actionsDropdownOpen, setActionsDropdownOpen] = useState(false);
   const [liked, setLiked] = useState(false);
   const {
@@ -89,16 +91,21 @@ export const TrackCard = ({ track }: TrackCardProps) => {
     if (currentTrackId === track.txid) {
       togglePlaying?.();
     } else {
-      // if (trackIndex >= 0) {
-      setTracklist?.([track], 0);
-      setCurrentTrackId?.(track.txid);
-      setCurrentTrackIndex?.(0);
-      // }
+      if (trackIndex >= 0) {
+        setTracklist?.(tracks, trackIndex);
+        setCurrentTrackId?.(track.txid);
+        setCurrentTrackIndex?.(trackIndex);
+      }
     }
   };
 
   return (
-    <Box asChild>
+    <Box
+      asChild
+      style={css({
+        width: `calc(${TRACK_ITEM_SIZE}px * var(--scaling))`,
+      })}
+    >
       <li>
         <Flex
           direction="column"
@@ -175,7 +182,7 @@ export const TrackCard = ({ track }: TrackCardProps) => {
                 textOverflow: "ellipsis",
                 whiteSpace: "nowrap",
                 overflow: "hidden",
-                maxWidth: "24ch",
+                maxWidth: "20ch",
               })}
             >
               {track.creator}

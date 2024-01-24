@@ -85,9 +85,11 @@ const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.6)`;
 
 interface TrackCardProps {
   track: Track;
+  tracks: Track[];
+  trackIndex: number;
 }
 
-export const TrackItem = ({ track }: TrackCardProps) => {
+export const TrackItem = ({ track, tracks, trackIndex }: TrackCardProps) => {
   const [actionsDropdownOpen, setActionsDropdownOpen] = useState(false);
   const [liked, setLiked] = useState(false);
   const {
@@ -108,11 +110,11 @@ export const TrackItem = ({ track }: TrackCardProps) => {
     if (currentTrackId === track.txid) {
       togglePlaying?.();
     } else {
-      // if (trackIndex >= 0) {
-      setTracklist?.([track], 0);
-      setCurrentTrackId?.(track.txid);
-      setCurrentTrackIndex?.(0);
-      // }
+      if (trackIndex >= 0) {
+        setTracklist?.(tracks, trackIndex);
+        setCurrentTrackId?.(track.txid);
+        setCurrentTrackIndex?.(trackIndex);
+      }
     }
   };
 
@@ -132,7 +134,7 @@ export const TrackItem = ({ track }: TrackCardProps) => {
       <Flex gap="3" align="center">
         <TrackIndexWrapper
           data-track-index-wrapper
-          playing={playing}
+          playing={isPlaying}
           style={css({
             width: 24,
             height: 24,
@@ -141,12 +143,12 @@ export const TrackItem = ({ track }: TrackCardProps) => {
           })}
         >
           <Text data-track-index size="1">
-            1
+            {trackIndex + 1}
           </Text>
           <PiVinylRecordLight />
         </TrackIndexWrapper>
         <PlayIconButton size="1" data-play-button onClick={handleClick}>
-          {playing ? <MdPause /> : <MdPlayArrow />}
+          {isPlaying ? <MdPause /> : <MdPlayArrow />}
         </PlayIconButton>
         <Box
           style={css({

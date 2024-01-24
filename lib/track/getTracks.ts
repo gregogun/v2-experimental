@@ -1,15 +1,15 @@
-import { GetTrack } from "@/types/query";
+import { GetTrack, GetTracks } from "@/types/query";
 import { gql } from "../helpers/gql";
 import { appConfig } from "@/config";
 import { setTrackInfo } from "../helpers/setTrackInfo";
 import { TransactionEdge } from "arweave-graphql";
 import { Track } from "@/types";
 
-export const getTrack = async ({ txid }: GetTrack) => {
+export const getTracks = async (props: GetTracks): Promise<Track[]> => {
   try {
     const res = await gql({
       variables: {
-        ids: [txid],
+        ids: props.txids,
         tags: [
           {
             name: "Content-Type",

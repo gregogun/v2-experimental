@@ -7,3 +7,7 @@ export interface GQLQuery {
 export interface GetTrack {
   txid: string;
 }
+
+export interface GetTracks {
+  txids?: string[];
+}
