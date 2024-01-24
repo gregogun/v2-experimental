@@ -1,3 +1,7 @@
+import CurveHighIcon from "@/assets/icons/CurveHighIcon";
+import CurveLowIcon from "@/assets/icons/CurveLowIcon";
+import CurveMediumIcon from "@/assets/icons/CurveMediumIcon";
+import VolumeIcon from "@/assets/icons/VolumeIcon";
 import { appConfig } from "@/config";
 import { useAudioPlayer } from "@/hooks/useAudioPlayer";
 import { css } from "@/styles/css";
@@ -12,9 +16,9 @@ import {
   Slider,
   Text,
 } from "@radix-ui/themes";
+import { keyframes, styled } from "@stitches/react";
 import { useEffect, useRef, useState } from "react";
 import { BsMusicNote } from "react-icons/bs";
-import { IoIosVolumeLow } from "react-icons/io";
 import {
   MdLoop,
   MdPause,
@@ -27,6 +31,34 @@ import {
 const ARTWORK_SIZE = 40;
 const OUTLINE_OFFSET = 0.5;
 const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.7)`;
+
+const CurvesContainer = styled(Flex, {
+  gap: 0.5,
+  marginLeft: -1,
+});
+
+const MuteLine = styled("div", {
+  top: 4,
+  bottom: 0,
+  left: 3.4,
+  zIndex: 2,
+  width: 1.5,
+  transformOrigin: "left top",
+  background: "currentColor",
+  borderRadius: "var(--radius-6)",
+  position: "absolute",
+  transform: "rotate(-45deg) scaleY(0)",
+  transition: "transform 150ms ease-in-out 150ms",
+  height: 15,
+
+  variants: {
+    muted: {
+      true: {
+        transform: "rotate(-45deg) scaleY(1)",
+      },
+    },
+  },
+});
 
 const AvatarFallback = () => (
   <Grid
@@ -41,15 +73,6 @@ const AvatarFallback = () => (
 );
 
 export const AudioPlayer = () => {
-  const [progressStep, setProgressStep] = useState<number>(0.01);
-  const [scrubbedValue, setScrubbedValue] = useState<number | undefined>(
-    undefined
-  );
-  const [scrubbing, setScrubbing] = useState<boolean>();
-  const [duration, setDuration] = useState<number>();
-  const [currentTime, setCurrentTime] = useState<number>(0);
-  const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
-
   const {
     audioRef,
     gainRef,
@@ -67,6 +90,15 @@ export const AudioPlayer = () => {
     shuffle,
     loop,
   } = useAudioPlayer();
+  const [progressStep, setProgressStep] = useState<number>(0.01);
+  const [scrubbedValue, setScrubbedValue] = useState<number | undefined>(
+    undefined
+  );
+  const [scrubbing, setScrubbing] = useState<boolean>();
+  const [duration, setDuration] = useState<number>();
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
+  const [volume, setVolume] = useState(gainRef?.current?.gain.value);
 
   const isMediaSessionAvailable =
     typeof window !== "undefined" && "mediaSession" in window.navigator;
@@ -106,8 +138,15 @@ export const AudioPlayer = () => {
   const handleValueChange = (e: number[]) => {
     if (!gainRef.current) return;
 
+    setVolume(e[0]);
     gainRef.current.gain.value = e[0] / 100;
   };
+
+  useEffect(() => {
+    if (volume && volume > 0) {
+      console.log(volume);
+    }
+  }, [volume]);
 
   const handleProgressChange = (e: number[]) => {
     if (!audioRef.current) return;
@@ -200,7 +239,13 @@ export const AudioPlayer = () => {
         <source src={currentTrack?.audioSrc} type="audio/ogg" />
       </audio>
 
-      <Flex gap="3" align="center">
+      <Flex
+        gap="3"
+        align="center"
+        style={css({
+          paddingLeft: "var(--space-2)",
+        })}
+      >
         <Avatar
           src={`${currentTrack?.thumbnailSrc}`}
           fallback={<AvatarFallback />}
@@ -368,7 +413,52 @@ export const AudioPlayer = () => {
           align="center"
           gap="3"
         >
-          <IoIosVolumeLow />
+          <Box
+            aria-hidden="true"
+            style={css({
+              position: "relative",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              lineHeight: 0,
+              color: "var(--gray-11)",
+            })}
+          >
+            <VolumeIcon />
+            <MuteLine
+              css={{
+                left: 2.4,
+                width: 3,
+                background: "var(--gray-1)",
+              }}
+              muted={!volume}
+            />
+            <MuteLine muted={!volume} />
+            <CurvesContainer
+              align="center"
+              css={{
+                "& svg": {
+                  transition: "opacity 200ms ease-in-out 50ms",
+                },
+              }}
+            >
+              <CurveLowIcon
+                style={css({
+                  opacity: volume && volume > 0 ? 1 : 0,
+                })}
+              />
+              <CurveMediumIcon
+                style={css({
+                  opacity: volume && volume > 30 ? 1 : 0,
+                })}
+              />
+              <CurveHighIcon
+                style={css({
+                  opacity: volume && volume > 60 ? 1 : 0,
+                })}
+              />
+            </CurvesContainer>
+          </Box>
           <Box
             style={css({
               flex: 1,

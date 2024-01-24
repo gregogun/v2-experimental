@@ -142,7 +142,7 @@ export const TrackCard = ({ track }: TrackCardProps) => {
                   open={actionsDropdownOpen}
                   setOpen={setActionsDropdownOpen}
                 >
-                  <AlphaIconButton variant="ghost" size="1" highContrast>
+                  <AlphaIconButton variant="ghost" size="1" color="gray">
                     <RxDotsHorizontal />
                   </AlphaIconButton>
                 </ActionsDropdown>

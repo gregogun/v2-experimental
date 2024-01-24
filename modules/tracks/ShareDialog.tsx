@@ -24,6 +24,7 @@ const OUTLINE_OFFSET = 0.5;
 const TRACK_ARTWORK_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.6)`;
 
 const TWITTER_WEB_INTENT_URL = "https://twitter.com/intent/tweet";
+const SHARE_BUTTON_VARIANT = "surface";
 
 interface ShareDialogProps {
   track: Track;
@@ -152,7 +153,7 @@ export const ShareDialog = (props: ShareDialogProps) => {
           <Flex align="center" justify="center" gap="5" asChild>
             <ul>
               <li>
-                <IconButton size="4" variant="outline" asChild>
+                <IconButton size="4" variant={SHARE_BUTTON_VARIANT} asChild>
                   <a href={twitterUrl}>
                     <VisuallyHidden>X / Twitter</VisuallyHidden>
                     <BsTwitterX />
@@ -160,7 +161,7 @@ export const ShareDialog = (props: ShareDialogProps) => {
                 </IconButton>
               </li>
               <li>
-                <IconButton size="4" variant="outline" asChild>
+                <IconButton size="4" variant={SHARE_BUTTON_VARIANT} asChild>
                   <a href={whatsappUrl}>
                     <VisuallyHidden>Whatsapp</VisuallyHidden>
                     <BsWhatsapp />
@@ -168,7 +169,7 @@ export const ShareDialog = (props: ShareDialogProps) => {
                 </IconButton>
               </li>
               <li>
-                <IconButton size="4" variant="outline" asChild>
+                <IconButton size="4" variant={SHARE_BUTTON_VARIANT} asChild>
                   <a href={telegramUrl}>
                     <VisuallyHidden>Telegram</VisuallyHidden>
                     <BsTelegram />
@@ -180,7 +181,7 @@ export const ShareDialog = (props: ShareDialogProps) => {
                   onClick={handleCopy}
                   aria-label="Copy song link"
                   size="4"
-                  variant={isCopied ? "solid" : "outline"}
+                  variant={isCopied ? "solid" : SHARE_BUTTON_VARIANT}
                 >
                   {isCopied ? <RxCheck /> : <BsCopy />}
                 </IconButton>
