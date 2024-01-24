@@ -19,8 +19,8 @@ export default function Home() {
         style={css({
           height: 1,
           backgroundColor: "var(--slate-5)",
-          marginInline: "-20px",
         })}
+        mx="-2"
       />
       <TrackGrid />
       <AudioPlayer />
