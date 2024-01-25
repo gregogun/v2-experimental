@@ -1,3 +1,4 @@
+// UI
 export type IconProps = {
   width?: number | string | undefined;
   height?: number | string | undefined;
@@ -9,6 +10,7 @@ export interface DialogOpenProps {
   open: boolean;
 }
 
+// Data
 export type License = {
   tx: string | undefined;
   access: string | undefined;
@@ -31,6 +33,25 @@ export type Track = {
 };
 
 export type Tracklist = Track[];
+
+export interface GetUseProfileProps {
+  address: string | undefined;
+}
+
+export interface Profile {
+  txid: string;
+  addr: string;
+  name: string;
+  handle: string | undefined;
+  thumbnailSrc: string | undefined;
+  avatarSrc: string | undefined;
+  bannerSrc: string | undefined;
+  bio: string | undefined;
+  links?: {
+    [link: string]: string;
+  };
+  cursor: string;
+}
 
 // Interfaces for aoconnect
 export interface SpawnProcessParams {
