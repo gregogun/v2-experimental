@@ -8,4 +8,7 @@ export const appConfig = {
   acceptedFileTypes: {
     streamableAudio: ["audio/mp3", "audio/ogg", "audio/aac", "audio/x-m4a"],
   },
+  ao: {
+    SCHEDULER: "TZ7o7SIZ06ZEJ14lXwVtng1EtSx60QkPy-kh-kdAXog",
+  },
 };

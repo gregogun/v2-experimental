@@ -31,3 +31,30 @@ export type Track = {
 };
 
 export type Tracklist = Track[];
+
+// Interfaces for aoconnect
+export interface SpawnProcessParams {
+  moduleTxId: string;
+  signer: any; // Replace 'any' with the specific signer type from aoconnect
+  tags?: { name: string; value: string }[];
+}
+
+export interface SendMessageParams {
+  processId: string;
+  action: string;
+  target: string;
+  signer: any; // Replace 'any' with the specific signer type from aoconnect
+  data?: string;
+}
+
+export interface MessageResult {
+  Messages: any[]; // Replace 'any' with the specific message type from aoconnect
+  Spawns: any[]; // Replace 'any' with the specific spawn type from aoconnect
+  Output: string;
+  Error?: string;
+}
+
+export interface ReadResultParams {
+  messageId: string;
+  processId: string;
+}
