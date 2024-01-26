@@ -118,7 +118,7 @@ export const TrackCard = ({ track, tracks, trackIndex }: TrackCardProps) => {
             style={css({
               width: `calc(${TRACK_ITEM_SIZE}px * var(--scaling))`,
               height: `calc(${TRACK_ITEM_SIZE}px * var(--scaling))`,
-              outline: `${OUTLINE_OFFSET}px solid var(--white-a3)`,
+              outline: `${OUTLINE_OFFSET}px solid var(--gray-a3)`,
               outlineOffset: -OUTLINE_OFFSET,
               borderRadius: TRACK_ITEM_RADIUS,
               overflow: "hidden",

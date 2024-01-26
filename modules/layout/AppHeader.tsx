@@ -12,8 +12,8 @@ export const AppHeader = () => {
     <Flex
       style={css({
         width: "100%",
-        padding: "var(--space-3)",
-        paddingBottom: "var(--space-4)",
+        padding: "var(--space-1)",
+        paddingBottom: "var(--space-3)",
       })}
       asChild
       align="center"
