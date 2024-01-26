@@ -3,6 +3,7 @@ import { useGetUserProfile } from "@/hooks/appData";
 import { AppHeader } from "@/modules/layout/AppHeader";
 import { AudioPlayer } from "@/modules/player/AudioPlayer";
 import { css } from "@/styles/css";
+import { abbreviateAddress } from "@/utils";
 import {
   AspectRatio,
   Avatar,
@@ -24,7 +25,28 @@ const AVATAR_RADIUS = `max(var(--radius-3), var(--radius-full) * 0.8)`;
 const AVATAR_SIZE = 200;
 const OUTLINE_OFFSET = 2;
 const BANNER_HEIGHT = 320;
-const VOUCHED_ICON_SIZE = 40;
+const VOUCHED_ICON_SIZE = 28;
+
+const AlphaIconButton = styled(IconButton, {
+  color: "var(--white-a10)",
+
+  "&:hover": {
+    backgroundColor: "var(--white-a4)",
+    color: "var(--white-a12)",
+  },
+
+  variants: {
+    liked: {
+      true: {
+        color: "var(--accent-9)",
+        "&:hover": {
+          backgroundColor: "var(--white-a4)",
+          color: "var(--accent-10)",
+        },
+      },
+    },
+  },
+});
 
 export default function Profile() {
   const address = useActiveAddress();
@@ -111,33 +133,34 @@ export default function Profile() {
               outlineOffset: -OUTLINE_OFFSET,
             })}
           />
-          <Flex direction="column">
+          <Flex direction="column" gap="3">
             <Flex
               align="center"
               gap="2"
               style={css({
-                background: "var(--black-a5)",
+                background: "var(--black-a3)",
                 padding: "var(--space-3)",
+                backdropFilter: "blur(4px)",
+                color: "var(--white-a11)",
+                borderRadius: BANNER_RADIUS,
               })}
             >
               <Text
-                size="9"
+                size="8"
                 weight="medium"
                 style={css({
                   textOverflow: "ellipsis",
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   maxWidth: "20ch",
-                  padding: "var(--space-1)",
                 })}
               >
-                {profile?.name || addr}
+                {profile?.name || abbreviateAddress({ address: addr })}
               </Text>
               <BsPatchCheckFill
                 style={css({
                   width: VOUCHED_ICON_SIZE,
                   height: VOUCHED_ICON_SIZE,
-                  color: "var(--accent-9)",
                 })}
               />
             </Flex>
@@ -146,8 +169,11 @@ export default function Profile() {
                 align="center"
                 gap="2"
                 style={css({
-                  background: "var(--black-a5)",
-                  padding: "var(--space-3)",
+                  background: "var(--black-a3)",
+                  padding: "var(--space-2) var(--space-3)",
+                  color: "var(--white-a11)",
+                  alignSelf: "start",
+                  borderRadius: BANNER_RADIUS,
                 })}
               >
                 <Text
@@ -159,11 +185,11 @@ export default function Profile() {
                     maxWidth: "20ch",
                   })}
                 >
-                  {addr}
+                  {abbreviateAddress({ address: addr })}
                 </Text>
-                <IconButton size="1" color="gray" variant="ghost">
+                <AlphaIconButton size="1" color="gray" variant="ghost">
                   <BsCopy />
-                </IconButton>
+                </AlphaIconButton>
               </Flex>
             )}
           </Flex>
