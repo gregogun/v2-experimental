@@ -14,6 +14,7 @@ import {
 } from "@radix-ui/themes";
 import { styled } from "@stitches/react";
 import { useConnection } from "arweave-wallet-kit";
+import Link from "next/link";
 import {
   BsPersonBoundingBox,
   BsPlugFill,
@@ -121,9 +122,11 @@ export const HeaderDropdown = (props: HeaderDropdownProps) => {
           </Flex>
         </Flex>
         <DropdownMenuSeparator style={css({ marginInline: 0 })} />
-        <StyledDropdownMenuItem>
-          <BsPersonBoundingBox />
-          Profile
+        <StyledDropdownMenuItem asChild>
+          <Link href="/profile">
+            <BsPersonBoundingBox />
+            Profile
+          </Link>
         </StyledDropdownMenuItem>
         <StyledDropdownMenuItem>
           <BsQuestionCircleFill />
