@@ -34,8 +34,18 @@ export type Track = {
 
 export type Tracklist = Track[];
 
-export interface GetUseProfileProps {
+export interface GetUserProfileProps {
   address: string | undefined;
+}
+
+export interface SetUserProfileProps {
+  address: string;
+  name: string | undefined;
+  handle: string | undefined;
+  bio: string | undefined;
+  thumbnail: File | string | undefined;
+  avatar: File | string | undefined;
+  banner: File | string | undefined;
 }
 
 export interface Profile {
