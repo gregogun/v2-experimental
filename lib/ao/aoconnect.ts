@@ -17,7 +17,7 @@ export const spawnProcess = async ({
   moduleTxId,
   signer,
   tags = [],
-}: SpawnProcessParams): Promise<string | undefined> => {
+}: SpawnProcessParams) => {
   try {
     const processId = await spawn({
       module: moduleTxId,
@@ -63,20 +63,20 @@ export const sendMessage = async ({
 export const readMessageResult = async ({
   messageId,
   processId,
-}: ReadResultParams): Promise<MessageResult | undefined> => {
+}: ReadResultParams): Promise<MessageResult> => {
   try {
     const { Messages, Spawns, Output, Error } = await result({
       message: messageId,
       process: processId,
     });
     if (Error) {
-      console.error("Error in message result:", Error);
+      throw new Error("Error in message result:", Error);
     } else {
       console.log("Message result:", { Messages, Spawns, Output });
       return { Messages, Spawns, Output };
     }
   } catch (error) {
-    console.error("Error fetching message result:", error);
+    console.error(error);
     throw error;
   }
 };
