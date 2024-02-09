@@ -1,3 +1,4 @@
+// UI
 export type IconProps = {
   width?: number | string | undefined;
   height?: number | string | undefined;
@@ -9,6 +10,7 @@ export interface DialogOpenProps {
   open: boolean;
 }
 
+// Data
 export type License = {
   tx: string | undefined;
   access: string | undefined;
@@ -31,3 +33,59 @@ export type Track = {
 };
 
 export type Tracklist = Track[];
+
+export interface GetUserProfileProps {
+  address: string | undefined;
+}
+
+export interface SetUserProfileProps {
+  address: string;
+  name: string | undefined;
+  handle: string | undefined;
+  bio: string | undefined;
+  thumbnail: File | string | undefined;
+  avatar: File | string | undefined;
+  banner: File | string | undefined;
+}
+
+export interface Profile {
+  txid: string;
+  addr: string;
+  name: string;
+  handle: string | undefined;
+  thumbnailSrc: string | undefined;
+  avatarSrc: string | undefined;
+  bannerSrc: string | undefined;
+  bio: string | undefined;
+  links?: {
+    [link: string]: string;
+  };
+  cursor: string;
+}
+
+// Interfaces for aoconnect
+export interface SpawnProcessParams {
+  moduleTxId: string;
+  signer: any; // Replace 'any' with the specific signer type from aoconnect
+  tags?: { name: string; value: string }[];
+}
+
+export interface SendMessageParams {
+  processId: string;
+  action: string;
+  target: string;
+  signer: any; // Replace 'any' with the specific signer type from aoconnect
+  data?: string;
+}
+
+export interface MessageResult {
+  Messages: any[]; // Replace 'any' with the specific message type from aoconnect
+  Spawns: any[]; // Replace 'any' with the specific spawn type from aoconnect
+  Output: string;
+  Error?: string;
+}
+
+export interface ReadResultParams {
+  messageId: string;
+  processId: string;
+}

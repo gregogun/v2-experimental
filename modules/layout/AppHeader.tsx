@@ -1,17 +1,19 @@
 import { Button, Flex, Link, Text } from "@radix-ui/themes";
 import { css } from "../../styles/css";
-import { useTheme } from "next-themes";
 import AppLogo from "@/assets/icons/AppLogo";
-import { useConnection } from "arweave-wallet-kit";
+import { useConnection, useActiveAddress } from "arweave-wallet-kit";
+import { HeaderDropdown } from "./HeaderDropdown";
 
 export const AppHeader = () => {
   const { connected, connect, disconnect } = useConnection();
+  const address = useActiveAddress();
 
   return (
     <Flex
       style={css({
         width: "100%",
-        padding: "var(--space-3)",
+        padding: "var(--space-1)",
+        paddingBottom: "var(--space-3)",
       })}
       asChild
       align="center"
@@ -28,11 +30,18 @@ export const AppHeader = () => {
         >
           <AppLogo />
         </Link>
-        {
-          <Button variant="surface" onClick={connected ? disconnect : connect}>
+        {connected ? (
+          <HeaderDropdown address={address} />
+        ) : (
+          // we still check in case of unlikely scenario that we are connected but no active address
+          <Button
+            variant="ghost"
+            onClick={connected ? disconnect : connect}
+            color="gray"
+          >
             {connected ? "Disconnect" : "Connect"}
           </Button>
-        }
+        )}
       </header>
     </Flex>
   );
