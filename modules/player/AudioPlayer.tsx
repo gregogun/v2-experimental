@@ -223,6 +223,7 @@ export const AudioPlayer = () => {
         backdropFilter: "blur(10px)",
         maxHeight: "max-content",
         borderTop: "1px solid var(--gray-5)",
+        zIndex: 99999,
       })}
     >
       <audio

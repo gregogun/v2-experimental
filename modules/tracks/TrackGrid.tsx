@@ -6,6 +6,8 @@ import { getTrack } from "@/lib/track/getTrack";
 import { Track } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { getTracks } from "@/lib/track/getTracks";
+import { TrackWaveform } from "./TrackWaveform";
+import { appConfig } from "@/config";
 
 export const TrackGrid = () => {
   const { data: tracks } = useQuery({
@@ -41,6 +43,17 @@ export const TrackGrid = () => {
               />
             ))}
         </ul>
+      </Grid>
+      <Grid p="5" gap="2" asChild>
+        <ul>
+          {tracks?.length &&
+            tracks.map((track, idx) => (
+              <li key={track.txid}>
+                <TrackWaveform src={track.audioSrc} track={track} />
+              </li>
+            ))}
+        </ul>
+        {/* <TrackWaveform src={appConfig.testAudioSrc} /> */}
       </Grid>
     </Flex>
   );

@@ -24,6 +24,7 @@
     "@radix-ui/themes": "2.0.3",
     "@stitches/react": "1.2.8",
     "@tanstack/react-query": "4.28.0",
+    "@wavesurfer/react": "1.0.4",
     "arweave": "1.14.4",
     "arweave-graphql": "0.0.5",
     "arweave-wallet-kit": "1.0.3",
@@ -32,7 +33,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "5.0.1",
-    "sonner": "1.1.0"
+    "sonner": "1.1.0",
+    "wavesurfer.js": "7.7.2"
   },
   "devDependencies": {
     "@types/node": "18.11.18",

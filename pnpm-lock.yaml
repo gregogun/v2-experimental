@@ -11,6 +11,7 @@ specifiers:
   '@types/node': 18.11.18
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
+  '@wavesurfer/react': 1.0.4
   arlocal: 1.1.65
   arweave: 1.14.4
   arweave-graphql: 0.0.5
@@ -25,6 +26,7 @@ specifiers:
   react-icons: 5.0.1
   sonner: 1.1.0
   typescript: 5.2.2
+  wavesurfer.js: 7.7.2
 
 dependencies:
   '@css-hooks/react': 1.6.0_@types+react@18.0.27
@@ -34,6 +36,7 @@ dependencies:
   '@radix-ui/themes': 2.0.3_fxtgt6bjwd6p4cwoordejim2zi
   '@stitches/react': 1.2.8_react@18.2.0
   '@tanstack/react-query': 4.28.0_biqbaboplfbrettd7655fr4n2y
+  '@wavesurfer/react': 1.0.4_oozcdiixtbuju6l6zyyd6asou4
   arweave: 1.14.4
   arweave-graphql: 0.0.5
   arweave-wallet-kit: 1.0.3_vegmnuvoswdxuttpuhvewcem44
@@ -43,6 +46,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-icons: 5.0.1_react@18.2.0
   sonner: 1.1.0_biqbaboplfbrettd7655fr4n2y
+  wavesurfer.js: 7.7.2
 
 devDependencies:
   '@types/node': 18.11.18
@@ -3797,6 +3801,16 @@ packages:
     dependencies:
       '@wallet-standard/base': 1.0.1
     dev: true
+
+  /@wavesurfer/react/1.0.4_oozcdiixtbuju6l6zyyd6asou4:
+    resolution: {integrity: sha512-6WkXLhh0EaytyK1B6JqHZmzHQlBz+nbGH5x009tUH6nUIFFXq7zwkDEXqeZuWyVTKgjqcOQGOgavSZ7EbsS6lA==}
+    peerDependencies:
+      react: ^18.2.0
+      wavesurfer.js: ^7.6.3
+    dependencies:
+      react: 18.2.0
+      wavesurfer.js: 7.7.2
+    dev: false
 
   /@weavery/clarity/0.1.5:
     resolution: {integrity: sha512-0ms2/sBx+uyW3EmXte5otIzNVAXpfJ3lBl6FS8JuLdWmPU6SxiAoGTMUT0N0SL3Ogiz2PZt6NV+mfApbSvYBaQ==}
@@ -8591,6 +8605,10 @@ packages:
   /vlq/2.0.4:
     resolution: {integrity: sha512-aodjPa2wPQFkra1G8CzJBTHXhgk3EVSwxSWXNPr1fgdFLUb8kvLV1iEb6rFgasIsjP82HWI6dsb5Io26DDnasA==}
     dev: true
+
+  /wavesurfer.js/7.7.2:
+    resolution: {integrity: sha512-x7Kx9FS+bkuSTkJrKe/eZ9f30MarDLpucObPVDcGl1npYoq3x/8dspUOUhaUasV3ZBAdcF+BzCMfMX2UVUDhCg==}
+    dev: false
 
   /wcwidth/1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
