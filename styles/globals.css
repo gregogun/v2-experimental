@@ -15,12 +15,25 @@
   --z-tooltip: 1800
 }
 
+:root, .light, .light-theme {
+  --side-panel-background: var(--white-a12)
+}
+
+.dark, .dark-theme {
+  --side-panel-background: var(--black-a5)
+}
+
+
 html,
 body,
 body > div:first-child,
 div#__next,
 div#__next > div {
-  height: 100%;
+  height: 100vh;
+}
+
+body {
+  margin: 0;
 }
 
 ul {

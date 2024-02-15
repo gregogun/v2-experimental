@@ -16,7 +16,7 @@ export const TrackGrid = () => {
 
   return (
     <Flex direction="column" gap="8">
-      <Grid p="5" asChild columns="5" gap="3" width="auto">
+      <Grid p="3" asChild columns="5" gap="3" width="auto">
         <ul>
           {tracks?.length &&
             tracks.map((track, idx) => (
@@ -29,7 +29,7 @@ export const TrackGrid = () => {
             ))}
         </ul>
       </Grid>
-      <Grid p="5" gap="2" asChild>
+      <Grid p="3" gap="2" asChild>
         <ul>
           {tracks?.length &&
             tracks.map((track, idx) => (

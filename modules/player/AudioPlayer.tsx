@@ -212,17 +212,17 @@ export const AudioPlayer = () => {
     <Box
       style={css({
         display: "grid",
-        gridTemplateColumns: "1fr 2fr 1fr",
-        width: "100%",
-        height: "max-content",
-        padding: "var(--space-2)",
         position: "fixed",
         bottom: 0,
         left: 0,
         right: 0,
+        gridTemplateColumns: "1fr 2fr 1fr",
+        width: "100%",
+        padding: "var(--space-2)",
         backdropFilter: "blur(10px)",
-        maxHeight: "max-content",
+        height: appConfig.playerMaxHeight,
         borderTop: "1px solid var(--gray-5)",
+        marginBlockStart: "auto",
       })}
     >
       <audio
