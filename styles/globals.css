@@ -15,14 +15,32 @@
   --z-tooltip: 1800
 }
 
+/* Custom vars */
+
 :root, .light, .light-theme {
-  --side-panel-background: var(--white-a12)
+  --side-panel-background: var(--gray-1)
 }
 
 .dark, .dark-theme {
   --side-panel-background: var(--black-a5)
 }
 
+:root, .light, .light-theme {
+  --audio-player-background: var(--white-a11)
+}
+
+.dark, .dark-theme {
+  --audio-player-background: var(--black-a11)
+
+}
+
+:root, .light, .light-theme {
+  --track-outline: var(--black-a2)
+}
+
+.dark, .dark-theme {
+  --track-outline: var(--white-a2)
+}
 
 html,
 body,
@@ -34,6 +52,7 @@ div#__next > div {
 
 body {
   margin: 0;
+  overflow-y: hidden;
 }
 
 ul {

@@ -61,8 +61,8 @@ const AlphaIconButton = styled(IconButton, {
 });
 
 const TRACK_ITEM_SIZE = 180;
-const OUTLINE_OFFSET = 0.5;
-const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.6)`;
+const OUTLINE_OFFSET = 1;
+const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.5)`;
 
 interface TrackCardProps {
   track: Track;
@@ -118,7 +118,7 @@ export const TrackCard = ({ track, tracks, trackIndex }: TrackCardProps) => {
             style={css({
               width: `calc(${TRACK_ITEM_SIZE}px * var(--scaling))`,
               height: `calc(${TRACK_ITEM_SIZE}px * var(--scaling))`,
-              outline: `${OUTLINE_OFFSET}px solid var(--white-a3)`,
+              outline: `${OUTLINE_OFFSET}px solid var(--track-outline)`,
               outlineOffset: -OUTLINE_OFFSET,
               borderRadius: TRACK_ITEM_RADIUS,
               overflow: "hidden",

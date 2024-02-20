@@ -19,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Theme
             radius="medium"
             grayColor="slate"
+            accentColor="indigo"
             panelBackground="translucent"
           >
             <style dangerouslySetInnerHTML={{ __html: hooks }} />

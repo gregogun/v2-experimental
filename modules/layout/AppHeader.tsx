@@ -12,10 +12,10 @@ export const AppHeader = () => {
     <Flex
       style={css({
         width: "100%",
-        padding: "var(--space-3)",
       })}
       align="center"
       justify="between"
+      p="5"
       asChild
     >
       <header>
