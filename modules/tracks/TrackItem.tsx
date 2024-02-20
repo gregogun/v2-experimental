@@ -80,8 +80,8 @@ const PlayIconButton = styled(IconButton, {
 });
 
 const TRACK_ITEM_SIZE = 32;
-const OUTLINE_OFFSET = 0.5;
-const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.6)`;
+const OUTLINE_OFFSET = 1;
+const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.5)`;
 
 interface TrackCardProps {
   track: Track;
@@ -154,7 +154,7 @@ export const TrackItem = ({ track, tracks, trackIndex }: TrackCardProps) => {
           style={css({
             width: `calc(${TRACK_ITEM_SIZE}px * var(--scaling))`,
             height: `calc(${TRACK_ITEM_SIZE}px * var(--scaling))`,
-            outline: `${OUTLINE_OFFSET}px solid var(--white-a3)`,
+            outline: `${OUTLINE_OFFSET}px solid var(--white-a7)`,
             outlineOffset: -OUTLINE_OFFSET,
             borderRadius: TRACK_ITEM_RADIUS,
             position: "relative",

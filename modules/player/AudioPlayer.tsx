@@ -28,9 +28,9 @@ import {
   MdSkipPrevious,
 } from "react-icons/md";
 
-const ARTWORK_SIZE = 40;
-const OUTLINE_OFFSET = 0.5;
-const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.7)`;
+const ARTWORK_SIZE = 56;
+const OUTLINE_OFFSET = 1;
+const TRACK_ITEM_RADIUS = `max(var(--radius-1), var(--radius-4) * 0.5)`;
 
 const CurvesContainer = styled(Flex, {
   gap: 0.5,
@@ -212,17 +212,18 @@ export const AudioPlayer = () => {
     <Box
       style={css({
         display: "grid",
-        gridTemplateColumns: "1fr 2fr 1fr",
-        width: "100%",
-        height: "max-content",
-        padding: "var(--space-2)",
         position: "fixed",
         bottom: 0,
         left: 0,
         right: 0,
+        gridTemplateColumns: "1fr 2fr 1fr",
+        width: "100%",
+        padding: "var(--space-2)",
         backdropFilter: "blur(10px)",
-        maxHeight: "max-content",
-        borderTop: "1px solid var(--gray-5)",
+        height: appConfig.playerMaxHeight,
+        backgroundColor: "var(--audio-player-background)",
+        borderTop: "1px solid var(--gray-3)",
+        marginBlockStart: "auto",
       })}
     >
       <audio
@@ -239,13 +240,7 @@ export const AudioPlayer = () => {
         <source src={currentTrack?.audioSrc} type="audio/ogg" />
       </audio>
 
-      <Flex
-        gap="3"
-        align="center"
-        style={css({
-          paddingLeft: "var(--space-2)",
-        })}
-      >
+      <Flex gap="3" align="center" pl="1">
         <Avatar
           src={`${currentTrack?.thumbnailSrc}`}
           fallback={<AvatarFallback />}
@@ -253,7 +248,7 @@ export const AudioPlayer = () => {
           style={css({
             width: `calc(${ARTWORK_SIZE}px * var(--scaling))`,
             height: `calc(${ARTWORK_SIZE}px * var(--scaling))`,
-            outline: `${OUTLINE_OFFSET}px solid var(--white-a3)`,
+            outline: `${OUTLINE_OFFSET}px solid var(--white-a2)`,
             outlineOffset: -OUTLINE_OFFSET,
             borderRadius: TRACK_ITEM_RADIUS,
           })}

@@ -11,6 +11,7 @@ import { Dispatch, SetStateAction, forwardRef, useRef, useState } from "react";
 import { MdLink, MdPlaylistAdd, MdPlaylistPlay, MdShare } from "react-icons/md";
 import { toast } from "sonner";
 import { ShareDialog } from "./ShareDialog";
+import { appConfig } from "@/config";
 
 const StyledDropdownMenuItem = styled(DropdownMenuItem, {
   justifyContent: "start",
@@ -40,12 +41,20 @@ export const ActionsDropdown = (props: ActionsDropdownProps) => {
         `${origin}/track?tx=${props.track.txid}`
       );
       toast.success("Link copied to clipboard", {
-        style: css({ padding: "var(--space-3)" }),
+        style: css({
+          padding: "var(--space-3)",
+          borderRadius: "max(var(--radius-2), var(--radius-full))",
+          bottom: appConfig.playerMaxHeight,
+        }),
       });
     } catch (err) {
       console.error(err);
       toast.error("Failed to copy link to clipboard", {
-        style: css({ padding: "var(--space-3)" }),
+        style: css({
+          padding: "var(--space-3)",
+          borderRadius: "max(var(--radius-2), var(--radius-full))",
+          bottom: appConfig.playerMaxHeight,
+        }),
       });
     }
   };
