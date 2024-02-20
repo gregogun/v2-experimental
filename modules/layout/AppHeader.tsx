@@ -4,9 +4,13 @@ import { useTheme } from "next-themes";
 import AppLogo from "@/assets/icons/AppLogo";
 import { useConnection } from "arweave-wallet-kit";
 import { RxChevronLeft, RxChevronRight } from "react-icons/rx";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 export const AppHeader = () => {
   const { connected, connect, disconnect } = useConnection();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <Flex
@@ -20,10 +24,22 @@ export const AppHeader = () => {
     >
       <header>
         <Flex gap="2">
-          <IconButton variant="soft" color="gray" size="1">
+          <IconButton
+            disabled={location.key === "default"}
+            variant="soft"
+            color="gray"
+            size="1"
+            onClick={() => navigate(-1)}
+          >
             <RxChevronLeft />
           </IconButton>
-          <IconButton variant="soft" color="gray" size="1">
+          <IconButton
+            disabled={location.pathname.includes("profile")}
+            variant="soft"
+            color="gray"
+            size="1"
+            onClick={() => navigate(1)}
+          >
             <RxChevronRight />
           </IconButton>
         </Flex>

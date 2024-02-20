@@ -23,6 +23,7 @@ specifiers:
   react: 18.2.0
   react-dom: 18.2.0
   react-icons: 5.0.1
+  react-router-dom: 6.11.2
   sonner: 1.1.0
   typescript: 5.2.2
 
@@ -42,6 +43,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-icons: 5.0.1_react@18.2.0
+  react-router-dom: 6.11.2_biqbaboplfbrettd7655fr4n2y
   sonner: 1.1.0_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
@@ -3470,6 +3472,11 @@ packages:
     dependencies:
       '@randlabs/communication-bridge': 1.0.1
     dev: true
+
+  /@remix-run/router/1.6.2:
+    resolution: {integrity: sha512-LzqpSrMK/3JBAVBI9u3NWtOhWNw5AMQfrUFYB0+bDHTSw17z++WJLsPsxAuK+oSddsxk4d7F/JcdDPM1M5YAhA==}
+    engines: {node: '>=14'}
+    dev: false
 
   /@rushstack/eslint-patch/1.2.0:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
@@ -7629,6 +7636,29 @@ packages:
       tslib: 2.5.0
       use-callback-ref: 1.3.1_3stiutgnnbnfnf3uowm5cip22i
       use-sidecar: 1.1.2_3stiutgnnbnfnf3uowm5cip22i
+    dev: false
+
+  /react-router-dom/6.11.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-JNbKtAeh1VSJQnH6RvBDNhxNwemRj7KxCzc5jb7zvDSKRnPWIFj9pO+eXqjM69gQJ0r46hSz1x4l9y0651DKWw==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+    dependencies:
+      '@remix-run/router': 1.6.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-router: 6.11.2_react@18.2.0
+    dev: false
+
+  /react-router/6.11.2_react@18.2.0:
+    resolution: {integrity: sha512-74z9xUSaSX07t3LM+pS6Un0T55ibUE/79CzfZpy5wsPDZaea1F8QkrsiyRnA2YQ7LwE/umaydzXZV80iDCPkMg==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      '@remix-run/router': 1.6.2
+      react: 18.2.0
     dev: false
 
   /react-side-effect/2.1.2_react@18.2.0:

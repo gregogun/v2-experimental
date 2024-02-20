@@ -6,6 +6,7 @@ import { RiSearchLine, RiSearchFill } from "react-icons/ri";
 import { appConfig } from "@/config";
 import { useRouter } from "next/router";
 import { styled } from "@stitches/react";
+import { Link as HashLink } from "react-router-dom";
 
 const StyledList = styled("ul", {
   "& svg": {
@@ -21,24 +22,26 @@ interface NavItemProps {
 
 const NavItem = (props: NavItemProps) => (
   <li>
-    <Link href={props.path}>
-      <Flex
-        gap="2"
-        align="center"
-        py="2"
-        px="3"
-        style={css({
-          alignSelf: "stretch",
-          color: props.active ? "var(--slate-12)" : "var(--slate-11)",
+    <Link asChild>
+      <HashLink to={props.path}>
+        <Flex
+          gap="2"
+          align="center"
+          py="2"
+          px="3"
+          style={css({
+            alignSelf: "stretch",
+            color: props.active ? "var(--slate-12)" : "var(--slate-11)",
 
-          "&:hover": {
-            // backgroundColor: "var(--slate-3)",
-            color: "var(--slate-12)",
-          },
-        })}
-      >
-        {props.children}
-      </Flex>
+            "&:hover": {
+              // backgroundColor: "var(--slate-3)",
+              color: "var(--slate-12)",
+            },
+          })}
+        >
+          {props.children}
+        </Flex>
+      </HashLink>
     </Link>
   </li>
 );
@@ -78,9 +81,11 @@ export const Sidebar = () => {
               display: "grid",
               placeItems: "center",
             })}
-            href="/"
+            asChild
           >
-            <AppLogo />
+            <HashLink to={"/"}>
+              <AppLogo />
+            </HashLink>
           </Link>
 
           <Flex direction="column" gap="3" mt="7" asChild>
